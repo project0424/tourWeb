@@ -88,7 +88,7 @@
 </head>
 <body data-ng-controller="myController">
 	<div class="topsection">
-		<a href="/refrigeratorweb/m/account">My Account</a>
+		<a href="/tourWeb/m/account">My Account</a>
 		<div>Refrigerator Management App</div>
 	</div>
 
@@ -111,7 +111,7 @@
 					<li><a href="#page3">Page 3</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/refrigeratorweb/m/home"><span
+					<li><a href="/tourWeb/m/home"><span
 							class="glyphicon glyphicon-log-out"></span>Log-out</a></li>
 				</ul>
 			</div>

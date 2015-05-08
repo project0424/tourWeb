@@ -2,3 +2,5 @@ target
 .setting
 .classpath 
 .project 
+WebContent/node_modules
+
