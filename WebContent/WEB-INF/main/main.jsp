@@ -88,7 +88,7 @@
 </head>
 <body data-ng-controller="myController">
 	<div class="topsection">
-		<a href="/refrigeratorweb/m/account">My Account</a>
+		<a href="/tourWeb/m/account">My Account</a>
 		<div>Refrigerator Management App</div>
 	</div>
 
