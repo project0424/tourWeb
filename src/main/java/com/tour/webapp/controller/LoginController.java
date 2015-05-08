@@ -1,86 +1,86 @@
 package com.tour.webapp.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tour.webapp.model.Member;
-import com.tour.webapp.service.MemberJoinService;
+import com.tour.webapp.model.LoginStatus;
+import com.tour.webapp.model.User;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+
 	static Log log = LogFactory.getLog(LoginController.class);
-
-	@Autowired
-	DataSource datasource;
-	@Autowired
-	MemberJoinService service;
 	
-	@RequestMapping(value={"","/"}, method=RequestMethod.GET) 
-	public String loginPage() {  
-		log.info("#################################################");
-		log.info("로그인 PAGE");
-		log.info("#################################################");
+	@ResponseBody
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public LoginStatus login(@RequestBody User user, HttpSession session) {
+		log.info("#########################");
+		log.info("login() POST...");
+		log.info("id=" + user.getId());
+		log.info("password=" + user.getPassword());
+		log.info("#########################");
 		
-		return "home"; 
-	}
-
-	@RequestMapping(value={"","/"}, method = RequestMethod.POST)
-	public String login(Member member, HttpSession session) { 
-
-		log.info("####################################");
-		log.info("join()");
-		log.info("email = " + member.getEmail());
-		log.info("password = " + member.getPassword());
-		log.info("####################################");
-
-		List<Member> members = service.getMembers();
-		for (Member m : members) {
-			log.info("#####################################");
-			log.info(m.getEmail() + " : " + member.getEmail());
-			log.info(m.getPassword() + " : " + member.getPassword());
-			log.info("#####################################");
-			if( m.getEmail().equals(member.getEmail()) && m.getPassword().equals(member.getPassword())){
-				session.setAttribute("member", m);
-				return "main/main";
-			}
+		LoginStatus result = new LoginStatus();
+		
+		if ("webapp".equals(user.getId()) && 
+			"1234".equals(user.getPassword())) {
+			// Login success
+			session.setAttribute("user", user);
+			result.setStatus(true);
+			
+		} else {
+			// Login Fail
+			result.setStatus(false);
 		}
-		session.setAttribute("msg", "email 또는 password를 잘못 입력하셨습니다");
-		return "redirect:login";
+
+		result.setUser(user);
 		
-//		if ("webapp".equals(member.getEmail()) && "1234".equals(member.getPassword())) {
-//				// Login success
-//				session.setAttribute("member", member);
-//				return "main/main";
-//			} else {
-//				// Login Fail
-//				return "redirect:login";
-//			}
+		return result;
+		
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/logincheck", method=RequestMethod.GET)
+	public LoginStatus logcheck(HttpSession session) {
+		log.info("#########################");
+		log.info("logincheck() GET...");
+		log.info("#########################");
+		
+		User user = (User)session.getAttribute("user");
+		
+		LoginStatus status = new LoginStatus();
+		if (user == null)
+			status.setStatus(false);
+		else
+			status.setStatus(true);
+		
+		status.setUser(user);
+		
+		return status;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(HttpSession session) {
+	public LoginStatus logout(HttpSession session) {
+		log.info("#########################");
+		log.info("logout() GET...");
+		log.info("#########################");
 		
 		session.invalidate();
 		
-		return "home";
+		LoginStatus status = new LoginStatus();
+		status.setStatus(false);
+		
+		return status;
 	}
-
+	
+	
 }
-
-
-
-
-
-
-
-

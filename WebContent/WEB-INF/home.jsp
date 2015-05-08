@@ -73,7 +73,7 @@
 				<button type="submit" class="btn btn-info btn-block">로그인</button>
 			</form>
 			<hr>
-			<a href="/refrigeratorweb/m/join" class="btn btn-default">회원가입</a>
+			<a href="/tourWeb/m/join" class="btn btn-default">회원가입</a>
 	  	</div>
 	</div>
 
