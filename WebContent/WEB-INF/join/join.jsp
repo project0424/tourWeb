@@ -163,7 +163,7 @@
 	</div>
 	
 	<div class="container">
-		<a href="/refrigeratorweb/m/home" class="btn btn-default btn-block">Home</a>
+		<a href="/tourWeb/m/home" class="btn btn-default btn-block">Home</a>
 	</div>
 
 </body>
