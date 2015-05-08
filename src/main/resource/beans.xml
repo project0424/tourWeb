@@ -7,7 +7,7 @@
 	
 	<context:property-placeholder location="classpath:/db.properties" />
 
-	<context:component-scan base-package="com.refrigerator.controller" />
+	<context:component-scan base-package="com.tour.webapp.controller" />
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -21,14 +21,14 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:/com/refrigerator/dao/xml/MemberDao.xml</value>
+				<value>classpath:/com/tour/webapp/dao/xml/MemberDao.xml</value>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="memberDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="mapperInterface" value="com.refrigerator.dao.MemberDao" />
+		<property name="mapperInterface" value="com.tour.webapp.dao.MemberDao" />
 	</bean>
 
 	<!-- <bean id="deptDao" class="webapp.dao.impl.MyDeptDao"> -->
@@ -43,7 +43,7 @@
 	<!-- <property name="dataSource" ref="dataSource"/> -->
 	<!-- </bean> -->
 
-	<bean id="memberJoinService" class="com.refrigerator.service.MemberJoinService">
+	<bean id="memberJoinService" class="com.tour.webapp.service.MemberJoinService">
 		<property name="dataSource" ref="dataSource" />
 		<property name="memberDao" ref="memberDao" />
 	</bean>
