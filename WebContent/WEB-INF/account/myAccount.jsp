@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>myAccount.jsp</title>
-<%@include file="/template.jspf"%>
+<%@include file="/login/jspf/template.jspf"%>
 <%@include file="/style.jspf"%>
 </head>
 <body data-ng-controller="myController">

@@ -24,11 +24,6 @@
 <script type="text/javascript">
 	var app = angular.module("myApp", ["ngSanitize", "ngAnimate", "ngRoute"]);
 	app.controller("myController", function($scope,$location) {
-		$scope.emps = [{
-			email : "xxxx@google.com",
-			password : "1234",
-			name : "saldgjk"
-		}];
 		$scope.empSubmit = function() {
 			var emp;
 			$.ajax({

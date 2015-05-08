@@ -1,0 +1,33 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<html data-ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title>template.jsp</title>
+
+<c:url var="jquery" value="/node_modules/jquery/dist"/>
+<c:url var="bootstrap" value="/node_modules/bootstrap/dist"/>
+<c:url var="angular" value="/node_modules/angular"/>
+<c:url var="angularSanitize" value="/node_modules/angular-sanitize"/>
+<c:url var="angularAnimate" value="/node_modules/angular-animate"/>
+<c:url var="angularRoute" value="/node_modules/angular-route"/>
+<c:url var="angularTouch" value="/node_modules/angular-touch"/>
+
+<link rel="stylesheet" href="${bootstrap}/css/bootstrap.min.css" />
+
+<script type="text/javascript" src="${jquery}/jquery.min.js"></script>
+<script type="text/javascript" src="${bootstrap}/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="${angular}/angular.min.js"></script>
+<script type="text/javascript" src="${angularSanitize}/angular-sanitize.min.js"></script>
+<script type="text/javascript" src="${angularAnimate}/angular-animate.min.js"></script>
+<script type="text/javascript" src="${angularRoute}/angular-route.min.js"></script>
+<script type="text/javascript" src="${angularTouch}/angular-touch.min.js"></script>
+<script type="text/javascript">
+	var app = angular.module("myApp", [ "ngSanitize", "ngAnimate", "ngRoute" ]);
+	app.controller("myController", function($scope) {
+		if ("${msg}" != "") {
+			alert("${msg}");
+		}
+	});
+</script>

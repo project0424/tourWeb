@@ -4,20 +4,20 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.tour.webapp.model.Member;
+import com.tour.webapp.model.User;
 
-public interface MemberDao {
+public interface UserDao {
 
 	public void setDataSource(DataSource ds);
 
-	public void joinMember(Member member);
+	public void signUpUser(User user);
 	
 //	public Member selectByDeptnoWithEmps(Integer deptno);
 //	
 //	/*
 //	 * Multiple row
 //	 */
-	public List<Member> selectAll();
+	public List<User> selectAll();
 //	public List<Member> selectAllWithEmps();
 
 }

@@ -3,11 +3,10 @@
  */
 
 app.controller("loginController", function($scope, $http, $location) {
-//		alert("homeController");
 	console.log("loginController start...");
 	$scope.$parent.pageClass = 'page-login';
 	
-	$scope.id = "";
+	$scope.email = "";
 	$scope.password = "";
 	
 	$scope.submit = function() {

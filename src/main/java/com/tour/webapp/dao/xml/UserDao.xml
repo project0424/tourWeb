@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tour.webapp.dao.MemberDao">
+<mapper namespace="com.tour.webapp.dao.UserDao">
     
-    <insert id="joinMember" parameterType="com.tour.webapp.model.Member" > -->
+    <insert id="signUpUser" parameterType="com.tour.webapp.model.User" > -->
 
-        INSERT INTO Member values(#{email},#{password},#{name})
+        INSERT INTO Member values(#{id},#{password},#{nickname})
 
     </insert>
 
-   	<select id="selectAll" resultType="com.tour.webapp.model.Member">
+   	<select id="selectAll" resultType="com.tour.webapp.model.User">
 		SELECT *
 		FROM member
 	</select>

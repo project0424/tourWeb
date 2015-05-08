@@ -1,9 +1,11 @@
 CREATE TABLE Member(
 
-             email		varchar2(20) PRIMARY KEY not null,
+             id		varchar2(20) PRIMARY KEY not null,
              password	varchar2(20) not null,
-             name		varchar2(20)
+             nickname	varchar2(20) not null
 );
+
 
 select * from Member
 delete from member
+drop table Member
