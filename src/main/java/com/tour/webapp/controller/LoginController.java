@@ -1,9 +1,13 @@
 package com.tour.webapp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tour.webapp.model.LoginStatus;
 import com.tour.webapp.model.User;
+import com.tour.webapp.service.UserSignUpService;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
 
 	static Log log = LogFactory.getLog(LoginController.class);
+	@Autowired
+	DataSource datasource;
+	@Autowired
+	UserSignUpService service;
 	
 	@ResponseBody
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -30,21 +39,23 @@ public class LoginController {
 		
 		LoginStatus result = new LoginStatus();
 		
-		if ("webapp".equals(user.getId()) && 
-			"1234".equals(user.getPassword())) {
-			// Login success
-			session.setAttribute("user", user);
-			result.setStatus(true);
-			
-		} else {
-			// Login Fail
-			result.setStatus(false);
+		List<User> users = service.getUsers();
+		for (User u : users) {
+			log.info("#####################################");
+			log.info(u.getId() + " : " + user.getId());
+			log.info(u.getPassword() + " : " + user.getPassword());
+			log.info("#####################################");
+			if(u.getId().equals(user.getId()) && u.getPassword().equals(user.getPassword())){
+				session.setAttribute("user", user);
+				result.setStatus(true);
+				return result;
+			} else {
+				// Login Fail
+				result.setStatus(false);
+			}
+			result.setUser(user);
 		}
-
-		result.setUser(user);
-		
-		return result;
-		
+		return result;	
 	}
 	
 	@ResponseBody
