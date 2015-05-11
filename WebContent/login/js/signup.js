@@ -4,6 +4,7 @@
 
 app.controller("signupController", function($scope, $http, $location) {
 	console.log("signupController start...");
+	alert("signup");
 	$scope.$parent.pageClass = 'page-signup';
 
 	$scope.userSubmit = function() {

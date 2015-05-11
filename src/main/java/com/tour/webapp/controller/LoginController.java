@@ -47,13 +47,13 @@ public class LoginController {
 			log.info("#####################################");
 			if(u.getId().equals(user.getId()) && u.getPassword().equals(user.getPassword())){
 				session.setAttribute("user", user);
+				result.setUser(user);
 				result.setStatus(true);
 				return result;
 			} else {
 				// Login Fail
 				result.setStatus(false);
 			}
-			result.setUser(user);
 		}
 		return result;	
 	}

@@ -5,6 +5,7 @@
 app.controller("loginController", function($scope, $http, $location) {
 	console.log("loginController start...");
 	$scope.$parent.pageClass = 'page-login';
+	alert("login");
 	
 	$scope.email = "";
 	$scope.password = "";

@@ -73,8 +73,8 @@
 					<li><a href="#/contact">Contact</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#/signup" data-ng-if="!login.status"><span
-							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="#/signup" data-ng-if="!login.status">
+						<span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
 					<li><a href="#/login" data-ng-if="!login.status"><span
 							class="glyphicon glyphicon-log-in"></span> Log in</a></li>
 					<li><a href="#/" data-ng-if="login.status"

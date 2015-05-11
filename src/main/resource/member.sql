@@ -7,5 +7,7 @@ CREATE TABLE Member(
 
 
 select * from Member
+
+
 delete from member
 drop table Member
