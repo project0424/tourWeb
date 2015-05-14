@@ -47,13 +47,17 @@
 app.controller("mainController", function($scope, $http, $location) {
 	$scope.submit = function() {
 		alert("!!!!!!!!!!!!!1");
-		$http.post("../m/keyword", {keyword : $scope.keyword}).success(function(result) {
-			alert("성공");
-		}).error(function() {
-			alert("실패");
+		$http.post("../m/keyword/keyword", {keyword : $scope.keyword}).success(function(result) {
+			alert("성공" + "	:	" + JSON.stringify(result));
+			$scope.result = result;
+		}).error(function(result) {
+			alert("실패" + " : " + JSON.stringify(result));
 		});
-		
 	};
+	$scope.info = function($index) {
+		var contentid = JSON.stringify($scope.result.items[$index].contentId);
+		alert(id);
+	}	
 });
 </script>
 
@@ -67,8 +71,16 @@ app.controller("mainController", function($scope, $http, $location) {
 		<button type="submit" class="btn btn-info btn-block">검색</button>
 	</form>
 
+	<h1>test</h1>
+	
+		<ul class="list-group">
+			<li class="container list-group-item btn btn-default" style="text-align: left;" data-ng-click="info($index)" data-ng-repeat = "item in result.items">
+		        <img src="{{item.image}}" style="width: 5em">  ContentID : {{item.contentId}} Title : {{item.title}}
+			</li>
+		</ul>
 </body>
 </html>
+
 
 
 
