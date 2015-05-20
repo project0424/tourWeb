@@ -22,18 +22,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tour.webapp.model.Item;
-import com.tour.webapp.model.Result;
-import com.tour.webapp.model.Test;
+import com.tour.webapp.model.KeywordItem;
+import com.tour.webapp.model.KeywordResult;
+import com.tour.webapp.model.Keyword;
 
 @Controller
 @RequestMapping("/keyword")
-public class TestController {
-	static Log log = LogFactory.getLog(TestController.class);
+public class KeywordController {
+	static Log log = LogFactory.getLog(KeywordController.class);
 	
 	@ResponseBody
 	@RequestMapping(value="/keyword", method=RequestMethod.POST)
-	public Result test(@RequestBody Test msg, HttpSession session) throws IOException {  
+	public KeywordResult test(@RequestBody Keyword msg, HttpSession session) throws IOException {  
 		log.info("#################################################");
 		log.info("Test PAGE" + " : " + msg.getKeyword());
 		log.info("#################################################");
@@ -42,8 +42,8 @@ public class TestController {
 		String keyword = URLEncoder.encode(msg.getKeyword(), "utf-8");
 		url = url + keyword;
 		
-		Result result = new Result();
-		List<Item> itemList = new ArrayList<Item>();
+		KeywordResult result = new KeywordResult();
+		List<KeywordItem> itemList = new ArrayList<KeywordItem>();
 		
 //		String ServiceKey = "h6zjishrjFDEzTiGpC6awTHfseVRQnc0GoyFQltRWtoEeosI69lpvjQum%2FhX9Ugk5qoFMuj%2F4NYGT4%2ByfR%2FQUg%3D%3D";
 //		String schLineType = "I";
@@ -73,7 +73,7 @@ public class TestController {
 			
 			for (int i = 0; i < itemArray.size(); i++) {
 				JSONObject item = (JSONObject) itemArray.get(i);
-				Item tempItem = new Item();
+				KeywordItem tempItem = new KeywordItem();
 				tempItem.setTitle((String)item.get("title"));
 				tempItem.setContentId(item.get("contentid").toString());
 				if(item.get("firstimage") != null)

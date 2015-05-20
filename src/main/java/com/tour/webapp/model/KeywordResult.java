@@ -2,24 +2,24 @@ package com.tour.webapp.model;
 
 import java.util.List;
 
-public class Result {
+public class KeywordResult {
 	
-	Item item;
-	List<Item> items;
+	KeywordItem item;
+	List<KeywordItem> items;
 
-	public List<Item> getItems() {
+	public List<KeywordItem> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Item> items) {
+	public void setItems(List<KeywordItem> items) {
 		this.items = items;
 	}
 
-	public Item getItem() {
+	public KeywordItem getItem() {
 		return item;
 	}
 
-	public void setItem(Item item) {
+	public void setItem(KeywordItem item) {
 		this.item = item;
 	}
 	

@@ -1,6 +1,6 @@
 package com.tour.webapp.model;
 
-public class Test {
+public class Keyword {
 
 	String keyword;
 
@@ -12,4 +12,3 @@ public class Test {
 		this.keyword = keyword;
 	}
 }
-  
