@@ -47,7 +47,7 @@
 </style>
 
 </head>
-<body >
+<body>
 	<!-- ############## -->
 	<!-- Navigation Bar -->
 	<!-- ############## -->
@@ -64,9 +64,9 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav" data-ng-show="login.status">
-						<li><a href="#/category">분류별</a></li>
-						<li><a href="#/location">지역별</a></li>
-						<li><a href="#/keyword"><span class="glyphicon glyphicon-search"></span> 검색</a></li>
+						<li class="{{active.categoryActive}}"><a href="#/category">분류별</a></li>
+						<li class=""><a href="#/location">지역별</a></li>
+						<li class=""><a href="#/keyword"><span class="glyphicon glyphicon-search"></span> 검색</a></li>
 <!-- 						<li class="dropdown"> -->
 <!-- 							<a class="dropdown-toggle"	data-toggle="dropdown" href="">Page 3 <span class="caret"></span></a> -->
 <!-- 							<ul class="dropdown-menu"> -->
@@ -101,29 +101,14 @@
 			<!-- default page = home -->
 		</div>
 
-		<hr />
-		<tabset>
-			<tab heading="Static title">Static content</tab> 
-			<tab ng-repeat="tab in tabs" heading="{{tab.title}}" 
-				active="tab.active" disable="tab.disabled">
-				 {{tab.link}} 
-				<h1>Location</h1>
-				<div ng-controller="AccordionDemoCtrl">		
-					<accordion close-others="oneAtATime">			
-						<accordion-group data-ng-click="area($index)" data-ng-repeat="local in locals">
-							<accordion-heading>
-								{{local.name}} <i class="pull-right glyphicon" data-ng-class="{'glyphicon-chevron-down': !status.open}"></i>
-							</accordion-heading>
-							<ul class="list-group">
-								<li class="container btn btn-default list-group-item" data-ng-click="info($index)" data-ng-repeat = "item in result.items">
-							        {{item.name}}
-								</li>
-							</ul>	
-						</accordion-group>
-					</accordion>
-				</div>
-			</tab> 
-		</tabset>
+<!-- 		<hr /> -->
+<!-- 		<tabset>  -->
+<!-- 			<tab ng-repeat="tab in tabs" heading="{{tab.title}}"  -->
+<!-- 				active="tab.active" disable="tab.disabled" ng-click="{{tab.link}}()"> -->
+<!-- 				<h1>Location</h1> -->
+<!-- 				{{tab.link}}  -->
+<!-- 			</tab>  -->
+<!-- 		</tabset> -->
 	</div>
 </body>
 </html>

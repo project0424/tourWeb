@@ -1,5 +1,5 @@
 /*
- * testController
+ * keywordController
  */
 
 app.controller("keywordController", function($scope, $http, $location) {
@@ -9,6 +9,7 @@ app.controller("keywordController", function($scope, $http, $location) {
 	
 	$scope.submit = function() {
 		alert("!!!!!!!!!!!!!1");
+		
 		$http.post("../m/keyword/keyword", {keyword : $scope.keyword}).success(function(result) {
 			alert("성공" + "	:	" + JSON.stringify(result));
 			$scope.result = result;
@@ -19,6 +20,13 @@ app.controller("keywordController", function($scope, $http, $location) {
 	
 	$scope.info = function($index) {
 		var contentid = JSON.stringify($scope.result.items[$index].contentId);
-		alert(id);
+		alert(info(contentid));
+		$http.post("../m/info/info", {contentid : contentid}).success(function(result) {
+			alert("성공" + "	:	" + JSON.stringify(result));
+			$scope.result = result;
+		}).error(function(result) {
+			alert("실패" + " : " + JSON.stringify(result));
+		});
+		$location()
 	}	
 });

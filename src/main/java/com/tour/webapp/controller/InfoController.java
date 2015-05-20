@@ -22,33 +22,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tour.webapp.model.KeywordItem;
-import com.tour.webapp.model.KeywordResult;
-import com.tour.webapp.model.Keyword;
+import com.tour.webapp.model.InfoCode;
+import com.tour.webapp.model.InfoResult;
+import com.tour.webapp.model.InfoItem;
 
 @Controller
-@RequestMapping("/keyword")
-public class KeywordController {
-	static Log log = LogFactory.getLog(KeywordController.class);
+@RequestMapping("/info")
+public class InfoController {
+	static Log log = LogFactory.getLog(InfoController.class);
 	
 	@ResponseBody
-	@RequestMapping(value="/keyword", method=RequestMethod.POST)
-	public KeywordResult test(@RequestBody Keyword msg, HttpSession session) throws IOException {  
+	@RequestMapping(value="/info", method=RequestMethod.POST)
+	public InfoResult info(@RequestBody InfoCode msg, HttpSession session) throws IOException {  
 		log.info("#################################################");
-		log.info("Test PAGE" + " : " + msg.getKeyword());
+		log.info("Test PAGE" + " : " + msg.getContentid());
 		log.info("#################################################");
 		
-		String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey=h6zjishrjFDEzTiGpC6awTHfseVRQnc0GoyFQltRWtoEeosI69lpvjQum%2FhX9Ugk5qoFMuj%2F4NYGT4%2ByfR%2FQUg%3D%3D&MobileOS=AND&MobileApp=AppTesting&_type=json&keyword=";
-		String keyword = URLEncoder.encode(msg.getKeyword(), "utf-8");
-		url = url + keyword;
+		String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=h6zjishrjFDEzTiGpC6awTHfseVRQnc0GoyFQltRWtoEeosI69lpvjQum%2FhX9Ugk5qoFMuj%2F4NYGT4%2ByfR%2FQUg%3D%3D&MobileOS=AND&MobileApp=AppTesting&_type=json&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&ServiceKey=h6zjishrjFDEzTiGpC6awTHfseVRQnc0GoyFQltRWtoEeosI69lpvjQum%2FhX9Ugk5qoFMuj%2F4NYGT4%2ByfR%2FQUg%3D%3D&contentId=";
+		String contentId = URLEncoder.encode(msg.getContentid(), "utf-8");
+		url = url + contentId;
 		
-		KeywordResult result = new KeywordResult();
-		List<KeywordItem> itemList = new ArrayList<KeywordItem>();
-		
-//		String ServiceKey = "h6zjishrjFDEzTiGpC6awTHfseVRQnc0GoyFQltRWtoEeosI69lpvjQum%2FhX9Ugk5qoFMuj%2F4NYGT4%2ByfR%2FQUg%3D%3D";
-//		String schLineType = "I";
-//		
-//		String temp = url + "?ServiceKey=" + ServiceKey + "&schLineType=" + schLineType;
+		InfoResult result = new InfoResult();
+		List<InfoItem> itemList = new ArrayList<InfoItem>();
 		
 		URL xml = new URL(url); 
 		InputStream in = xml.openStream();
@@ -68,24 +63,31 @@ public class KeywordController {
 			JSONArray itemArray = (JSONArray) items.get("item");
 			
 			log.info("#####################################");
-			log.info(((JSONObject)itemArray.get(0)).get("firstimage"));
+			log.info(((JSONObject)itemArray.get(0)));
 			log.info("#####################################");
 			
 			for (int i = 0; i < itemArray.size(); i++) {
 				JSONObject item = (JSONObject) itemArray.get(i);
-				KeywordItem tempItem = new KeywordItem();
+				InfoItem tempItem = new InfoItem();
 				tempItem.setTitle((String)item.get("title"));
-				tempItem.setContentId(item.get("contentid").toString());
+				tempItem.setAddr(item.get("addr1").toString());
+				tempItem.setHomepage(item.get("homepage").toString());
+				tempItem.setMapx(item.get("mapx").toString());
+				tempItem.setMapy(item.get("mapy").toString());
+				tempItem.setZipcode(item.get("zipcode").toString());
+				
+				if(item.get("tel") != null)
+					tempItem.setTel(item.get("tel").toString());
+				else
+					tempItem.setTel("번호정보 없음");
+				
 				if(item.get("firstimage") != null)
-					tempItem.setImage(item.get("firstimage2").toString());
+					tempItem.setImage(item.get("firstimage").toString());
 				else
 					tempItem.setImage("http://placehold.it/699x466");
+				
 				itemList.add(tempItem);
 			}
-			
-			log.info("#####################################");
-			log.info(itemList.get(0));
-			log.info("#####################################");
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -94,7 +96,6 @@ public class KeywordController {
 		result.setItems(itemList);
 		return result;                     
 	}
-   
 }  
 
 

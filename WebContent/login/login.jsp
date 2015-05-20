@@ -9,7 +9,6 @@
 <br>
 <div class="jumbotron">
 	<form class="form" data-ng-submit="submit()">
-
 		<div class="form-group form-block" data-inline="true">
 			<input type="text" class="form-control" name="id" id="id"
 				placeholder="Enter id" data-ng-model="id">

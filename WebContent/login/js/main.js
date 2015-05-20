@@ -65,14 +65,14 @@ app.config(function($routeProvider) {
 
 });
 
-app.controller("mainController", function($scope, $http, $rootScope,
-		$templateCache, $location) {
+app.controller("mainController", function($scope, $http, $rootScope, $templateCache, $location) {
 	alert("mainController");
 
 	$rootScope.$on('$routeChangeStart', function(event, next, current) {
 		if (typeof current != 'undefined') {
 			$templateCache.removeAll();
 			console.log("current.templateUrl=" + current.templateUrl);
+			alert("current.templateUrl=" + current.templateUrl);
 		}
 	});
 
@@ -129,6 +129,12 @@ app.controller("mainController", function($scope, $http, $rootScope,
 //		alert("실패" + " : " + JSON.stringify(result));
 //		});
 //	};
+	$scope.active = {
+		categoryActive : "active",
+		locationActive : "active",
+		keywordActive : "active"
+	};
+	
 	
 	/*
 	 * 탭
@@ -138,7 +144,7 @@ app.controller("mainController", function($scope, $http, $rootScope,
 		link : 'home'
 	}, {
 		title : '카테고리',
-		link : 'grid',
+		link : 'category',
 		disabled : true
 	}, {
 		title : '지역',
@@ -146,7 +152,8 @@ app.controller("mainController", function($scope, $http, $rootScope,
 		disabled : true
 	}, {
 		title : '키워드',
-		link : 'grid',
+		link : 'keyword',
 		disabled : true
 	} ];
+	
 });
