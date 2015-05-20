@@ -2,7 +2,11 @@
  * mainController
  */
 
+var app = angular.module("myApp", [ "ngSanitize", "ngAnimate", "ngRoute",
+		"ngTouch", "ui.bootstrap"]);
+
 app.config(function($routeProvider) {
+
 	$routeProvider
 	// home page
 	.when('/', {
@@ -40,22 +44,10 @@ app.config(function($routeProvider) {
 		controller : 'loginController'
 	})
 
-	// location page
-	.when('/location', {
-		templateUrl : 'location.jsp',
-		controller : 'locationController'
-	})
-	
-	// category page
-	.when('/category', {
-		templateUrl : 'category.jsp',
-		controller : 'categoryController'
-	})
-	
-	// keyword page
-	.when('/keyword', {
-		templateUrl : 'keyword.jsp',
-		controller : 'keywordController'
+	// myAccount page
+	.when('/myAccount', {
+		templateUrl : 'myAccount.jsp',
+		controller : 'myAccountController'
 	})
 
 	// otherwise page
@@ -67,7 +59,7 @@ app.config(function($routeProvider) {
 
 app.controller("mainController", function($scope, $http, $rootScope,
 		$templateCache, $location) {
-	alert("mainController");
+	// alert("mainController");
 
 	$rootScope.$on('$routeChangeStart', function(event, next, current) {
 		if (typeof current != 'undefined') {
@@ -116,37 +108,55 @@ app.controller("mainController", function($scope, $http, $rootScope,
 	}).error(function() {
 		alert("server error...");
 	});
+});
 
-	/*
-	 * 지역별 검색
-	 */
-//	$scope.location = function() {
-//		$http.post("../m/areacode/areacode", {areacode : ""}).success(function(result) {
-//			alert("성공" + "	:	" + JSON.stringify(result));
-//		$scope.result = result;
-//		
-//	}).error(function(result) {
-//		alert("실패" + " : " + JSON.stringify(result));
-//		});
-//	};
-	
-	/*
-	 * 탭
-	 */
+/*
+ * angular-bootstrap
+ */
+app.controller('TabsDemoCtrl', function($scope, $window) {
 	$scope.tabs = [ {
-		title : '홈',
-		link : 'home'
+		title : 'Dynamic Title 1',
+		content : 'Dynamic content 1'
 	}, {
-		title : '카테고리',
-		link : 'grid',
-		disabled : true
-	}, {
-		title : '지역',
-		link : 'location',
-		disabled : true
-	}, {
-		title : '키워드',
-		link : 'grid',
+		title : 'Dynamic Title 2',
+		content : 'Dynamic content 2',
 		disabled : true
 	} ];
+
+	$scope.alertMe = function() {
+		setTimeout(function() {
+			$window.alert('You\'ve selected the alert tab!');
+		});
+	};
 });
+
+/*
+ * angular-bootstrap2
+ */
+app.controller('AccordionDemoCtrl', function ($scope) {
+	  $scope.oneAtATime = true;
+
+	  $scope.groups = [
+	    {
+	      title: 'Dynamic Group Header - 1',
+	      content: 'Dynamic Group Body - 1'
+	    },
+	    {
+	      title: 'Dynamic Group Header - 2',
+	      content: 'Dynamic Group Body - 2'
+	    }
+	  ];
+
+	  $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+
+	  $scope.addItem = function() {
+	    var newItemNo = $scope.items.length + 1;
+	    $scope.items.push('Item ' + newItemNo);
+	  };
+
+	  $scope.status = {
+	    isFirstOpen: true,
+	    isFirstDisabled: false
+	  };
+	});
+			

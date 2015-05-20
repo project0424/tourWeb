@@ -3,6 +3,7 @@
 <%@include file="/login/jspf/template.jspf"%>
 
 <!-- login.jsp -->
+
 <div class="topsection" align="center">
 	<img src="http://placehold.it/50x50">
 </div>
@@ -37,4 +38,5 @@
 
 	<a href="">아이디 찾기</a> | <a href="">비밀번호 찾기</a>
 </div>
+
 

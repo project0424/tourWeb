@@ -16,6 +16,10 @@
 <script type="text/javascript" src="js/contact.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
 <script type="text/javascript" src="js/signup.js"></script>
+<script type="text/javascript" src="js/location.js"></script>
+<script type="text/javascript" src="js/keyword.js"></script>
+<script type="text/javascript" src="js/category.js"></script>
+
 
 <style type="text/css">
 .topsection {
@@ -60,28 +64,27 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav" data-ng-show="login.status">
-						<li><a href="#/grid">Grid</a></li>
-						<li><a href="#">Page 2</a></li>
-						<li class="dropdown">
-							<a class="dropdown-toggle"	data-toggle="dropdown" href="">Page 3 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Page 3-1</a></li>
-								<li><a href="#">Page 3-2</a></li>
-								<li><a href="#">Page 3-3</a></li>
-								<li><a href="#">Page 3-4</a></li>
-							</ul>
-						</li>
-						<li><a href="#/about">About</a></li>
-						<li><a href="#/contact">Contact</a></li>
+						<li><a href="#/category">분류별</a></li>
+						<li><a href="#/location">지역별</a></li>
+						<li><a href="#/keyword"><span class="glyphicon glyphicon-search"></span> 검색</a></li>
+<!-- 						<li class="dropdown"> -->
+<!-- 							<a class="dropdown-toggle"	data-toggle="dropdown" href="">Page 3 <span class="caret"></span></a> -->
+<!-- 							<ul class="dropdown-menu"> -->
+<!-- 								<li><a href="#">Page 3-1</a></li> -->
+<!-- 								<li><a href="#">Page 3-2</a></li> -->
+<!-- 								<li><a href="#">Page 3-3</a></li> -->
+<!-- 								<li><a href="#">Page 3-4</a></li> -->
+<!-- 							</ul> -->
+<!-- 						</li> -->
+<!-- 						<li><a href="#/about">About</a></li> -->
+<!-- 						<li><a href="#/contact">Contact</a></li> -->
 					</ul>
+					
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#/signup" data-ng-if="!login.status">
-							<span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
 						<li><a href="#/login" data-ng-if="!login.status"><span
 								class="glyphicon glyphicon-log-in"></span> Log in</a></li>
-						<li><a href="#/" data-ng-if="login.status"
-							data-ng-click="logout()"><span
-								class="glyphicon glyphicon-user"></span> My Account</a></li>
+						<li><a href="#/myAccount" data-ng-if="login.status"><span
+								class="glyphicon glyphicon-user"></span> {{login.user.id}}</a></li>
 						<li><a href="#/" data-ng-if="login.status"
 							data-ng-click="logout()"><span
 								class="glyphicon glyphicon-log-out"></span> Log out</a></li>
@@ -97,48 +100,31 @@
 			data-ng-swipe-left="swipeLeft()" data-ng-swipe-right="swipeRight()">
 			<!-- default page = home -->
 		</div>
+
+		<hr />
+		<tabset>
+			<tab heading="Static title">Static content</tab> 
+			<tab ng-repeat="tab in tabs" heading="{{tab.title}}" 
+				active="tab.active" disable="tab.disabled">
+				 {{tab.link}} 
+				<h1>Location</h1>
+				<div ng-controller="AccordionDemoCtrl">		
+					<accordion close-others="oneAtATime">			
+						<accordion-group data-ng-click="area($index)" data-ng-repeat="local in locals">
+							<accordion-heading>
+								{{local.name}} <i class="pull-right glyphicon" data-ng-class="{'glyphicon-chevron-down': !status.open}"></i>
+							</accordion-heading>
+							<ul class="list-group">
+								<li class="container btn btn-default list-group-item" data-ng-click="info($index)" data-ng-repeat = "item in result.items">
+							        {{item.name}}
+								</li>
+							</ul>	
+						</accordion-group>
+					</accordion>
+				</div>
+			</tab> 
+		</tabset>
 	</div>
-	
-	<div data-ng-controller="TabsDemoCtrl" >
-	  <p>Select a tab by setting active binding to true:</p>
-	  <p>
-	    <button class="btn btn-default btn-sm" ng-click="tabs[0].active = true">Select second tab</button>
-	    <button class="btn btn-default btn-sm" ng-click="tabs[1].active = true">Select third tab</button>
-	  </p>
-	  <p>
-	    <button class="btn btn-default btn-sm" ng-click="tabs[1].disabled = ! tabs[1].disabled">Enable / Disable third tab</button>
-	  </p>
-	  <hr />
-	
-	  <tabset>
-	    <tab heading="Static title">Static content</tab>
-	    <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
-	      {{tab.content}}
-	    </tab>
-	    <tab select="alertMe()">
-	      <tab-heading>
-	        <i class="glyphicon glyphicon-bell"></i> Alert!
-	      </tab-heading>
-	      I've got an HTML heading, and a select callback. Pretty cool!
-	    </tab>
-	  </tabset>
-	
-	  <hr />
-	
-	  <tabset vertical="true" type="pills">
-	    <tab heading="Vertical 1">Vertical content 1</tab>
-	    <tab heading="Vertical 2">Vertical content 2</tab>
-	  </tabset>
-	
-	  <hr />
-	
-	  <tabset justified="true">
-	    <tab heading="Justified">Justified content</tab>
-	    <tab heading="SJ">Short Labeled Justified content</tab>
-	    <tab heading="Long Justified">Long Labeled Justified content</tab>
-	  </tabset>
-	</div>
-	
 </body>
 </html>
 
