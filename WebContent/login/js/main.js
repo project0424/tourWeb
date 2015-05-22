@@ -4,6 +4,13 @@
 
 app.config(function($routeProvider) {
 	$routeProvider
+	
+	// searchkeyword page
+    .when('/tour/searchkeyword', {
+        templateUrl: 'tour/searchkeyword.jsp',
+        controller: 'searchkeywordController'
+    })
+    
 	// home page
 	.when('/', {
 		templateUrl : 'home.jsp',
@@ -58,6 +65,12 @@ app.config(function($routeProvider) {
 		controller : 'keywordController'
 	})
 
+	// info page
+	.when('/info', {
+		templateUrl : 'info.jsp',
+		controller : 'infoController'
+	})
+	
 	// otherwise page
 	.otherwise({
 		redirectTo : '/'

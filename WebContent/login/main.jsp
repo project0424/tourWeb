@@ -19,6 +19,8 @@
 <script type="text/javascript" src="js/location.js"></script>
 <script type="text/javascript" src="js/keyword.js"></script>
 <script type="text/javascript" src="js/category.js"></script>
+<script type="text/javascript" src="js/info.js"></script>
+<script type="text/javascript" src="js/tour/searchkeyword.js"></script>
 
 
 <style type="text/css">
@@ -67,6 +69,7 @@
 						<li class="{{active.categoryActive}}"><a href="#/category">분류별</a></li>
 						<li class=""><a href="#/location">지역별</a></li>
 						<li class=""><a href="#/keyword"><span class="glyphicon glyphicon-search"></span> 검색</a></li>
+						<li class=""><a href="#/tour/searchkeyword"><span class="glyphicon glyphicon-search"></span> 검색</a></li>
 <!-- 						<li class="dropdown"> -->
 <!-- 							<a class="dropdown-toggle"	data-toggle="dropdown" href="">Page 3 <span class="caret"></span></a> -->
 <!-- 							<ul class="dropdown-menu"> -->

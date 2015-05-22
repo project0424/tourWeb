@@ -11,6 +11,15 @@ public class InfoItem {
 	String modifiedtime;
 	String homepage;
 	String tel;
+	String overview;
+
+	public String getOverview() {
+		return overview;
+	}
+
+	public void setOverview(String overview) {
+		this.overview = overview;
+	}
 
 	public String getTitle() {
 		return title;

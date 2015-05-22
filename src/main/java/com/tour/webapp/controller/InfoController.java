@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tour.webapp.model.InfoCode;
 import com.tour.webapp.model.InfoResult;
-import com.tour.webapp.model.InfoItem;
+//import com.tour.webapp.model.InfoItem;
 
 @Controller
 @RequestMapping("/info")
@@ -38,12 +38,13 @@ public class InfoController {
 		log.info("Test PAGE" + " : " + msg.getContentid());
 		log.info("#################################################");
 		
-		String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=h6zjishrjFDEzTiGpC6awTHfseVRQnc0GoyFQltRWtoEeosI69lpvjQum%2FhX9Ugk5qoFMuj%2F4NYGT4%2ByfR%2FQUg%3D%3D&MobileOS=AND&MobileApp=AppTesting&_type=json&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&ServiceKey=h6zjishrjFDEzTiGpC6awTHfseVRQnc0GoyFQltRWtoEeosI69lpvjQum%2FhX9Ugk5qoFMuj%2F4NYGT4%2ByfR%2FQUg%3D%3D&contentId=";
+		String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=h6zjishrjFDEzTiGpC6awTHfseVRQnc0GoyFQltRWtoEeosI69lpvjQum%2FhX9Ugk5qoFMuj%2F4NYGT4%2ByfR%2FQUg%3D%3D&MobileOS=AND&MobileApp=AppTesting&_type=json&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&ServiceKey=h6zjishrjFDEzTiGpC6awTHfseVRQnc0GoyFQltRWtoEeosI69lpvjQum%2FhX9Ugk5qoFMuj%2F4NYGT4%2ByfR%2FQUg%3D%3D&contentId=";		
 		String contentId = URLEncoder.encode(msg.getContentid(), "utf-8");
 		url = url + contentId;
+		log.info(url);
 		
 		InfoResult result = new InfoResult();
-		List<InfoItem> itemList = new ArrayList<InfoItem>();
+//		List<InfoItem> itemList = new ArrayList<InfoItem>();
 		
 		URL xml = new URL(url); 
 		InputStream in = xml.openStream();
@@ -53,47 +54,73 @@ public class InfoController {
 		while (scan.hasNextLine()) {
 			temp = temp + scan.nextLine();
 		}
+		log.info(temp);
 		try {
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(temp);
+			log.info(jsonObject);
 			JSONObject response = (JSONObject) jsonObject.get("response");
+			log.info(response);
 			JSONObject body = (JSONObject) response.get("body");
+			log.info(body);
 			JSONObject items = (JSONObject) body.get("items");
+			log.info(items);
+			JSONObject item = (JSONObject) items.get("item");
 			
-			JSONArray itemArray = (JSONArray) items.get("item");
+			result.setResult(item.toJSONString());
+			log.info(result.getResult());
 			
-			log.info("#####################################");
-			log.info(((JSONObject)itemArray.get(0)));
-			log.info("#####################################");
+//			log.info(item.get("title").toString());
+//			log.info(item.get("addr1").toString());
+//			log.info(item.get("addr2").toString());
+//			log.info(item.get("zipcode").toString());
+//			log.info(item.get("areacode").toString());
+//			log.info(item.get("sigungucode").toString());
+//			log.info(item.get("cat1").toString());
+//			log.info(item.get("cat2").toString());
+//			log.info(item.get("cat3").toString());
+//			log.info(item.get("contentid").toString());
+//			log.info(item.get("contenttypeid").toString());
+//			log.info(item.get("createdtime").toString());
+//			log.info(item.get("firstimage").toString());
+//			log.info(item.get("firstimage2").toString());
+//			log.info(item.get("mlevel").toString());
+//			log.info(item.get("modifiedtime").toString());
+//			log.info(item.get("tel").toString());
+//			log.info(item.get("telname").toString());
 			
-			for (int i = 0; i < itemArray.size(); i++) {
-				JSONObject item = (JSONObject) itemArray.get(i);
-				InfoItem tempItem = new InfoItem();
-				tempItem.setTitle((String)item.get("title"));
-				tempItem.setAddr(item.get("addr1").toString());
-				tempItem.setHomepage(item.get("homepage").toString());
-				tempItem.setMapx(item.get("mapx").toString());
-				tempItem.setMapy(item.get("mapy").toString());
-				tempItem.setZipcode(item.get("zipcode").toString());
-				
-				if(item.get("tel") != null)
-					tempItem.setTel(item.get("tel").toString());
-				else
-					tempItem.setTel("번호정보 없음");
-				
-				if(item.get("firstimage") != null)
-					tempItem.setImage(item.get("firstimage").toString());
-				else
-					tempItem.setImage("http://placehold.it/699x466");
-				
-				itemList.add(tempItem);
-			}
+//			log.info(items.get("mapx").toString());
+//			log.info(items.get("mapy").toString());
+//			log.info(items.get("overview").toString());
+//			log.info(items.get("homepage").toString());
+			
+//			InfoItem tempItem = new InfoItem();
+//			tempItem.setTitle(item.get("title").toString());
+//			tempItem.setAddr(item.get("addr1").toString());
+//			tempItem.setHomepage(item.get("homepage").toString());
+//			tempItem.setMapx(items.get("mapx").toString());
+//			tempItem.setMapy(items.get("mapy").toString());
+//			tempItem.setZipcode(items.get("zipcode").toString());
+//			tempItem.setOverview(items.get("overview").toString());
+//			
+//			if(items.get("firstimage") != null)
+//				tempItem.setImage(item.get("firstimage").toString());
+//			else
+//				tempItem.setImage("http://placehold.it/699x466");
+//			
+//			if(items.get("tel") != null)
+//				tempItem.setTel(items.get("tel").toString());
+//			else
+//				tempItem.setTel("번호정보 없음");
+//			
+//			itemList.add(tempItem);
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		result.setItems(itemList);
+		
+//		result.setItems(itemList);
 		return result;                     
 	}
 }  

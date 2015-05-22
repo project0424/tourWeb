@@ -66,6 +66,7 @@ public class KeywordController {
 			JSONObject items = (JSONObject) body.get("items");
 			
 			JSONArray itemArray = (JSONArray) items.get("item");
+			log.info(itemArray);
 			
 			log.info("#####################################");
 			log.info(((JSONObject)itemArray.get(0)).get("firstimage"));
@@ -92,6 +93,7 @@ public class KeywordController {
 			e.printStackTrace();
 		}
 		result.setItems(itemList);
+		log.info(result);
 		return result;                     
 	}
    
